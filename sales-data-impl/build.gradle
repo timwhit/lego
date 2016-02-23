@@ -1,0 +1,55 @@
+configurations {
+    ws
+}
+
+dependencies {
+    compile project(':common')
+    compile project(':sales-data')
+
+    //CXF
+    compile("org.apache.cxf:cxf:$cxfVersion")
+    compile("org.apache.cxf:cxf-tools-wsdlto-databinding-jaxb:$cxfVersion") {
+        exclude(group: "org.apache.velocity")
+    }
+    compile("org.apache.cxf:cxf-rt-frontend-jaxws:$cxfVersion")
+    compile("org.apache.cxf:cxf-rt-transports-http:$cxfVersion")
+    compile("org.apache.cxf:cxf-rt-ws-security:$cxfVersion") {
+        exclude(group: "org.apache.velocity")
+    }
+    compile("org.apache.cxf:cxf-rt-bindings-soap:$cxfVersion")
+    compile("org.apache.cxf:cxf-rt-management:$cxfVersion")
+
+    ws "org.apache.cxf:cxf-tools:$cxfVersion",
+            "org.apache.cxf:cxf-tools-wsdlto-databinding-jaxb:$cxfVersion",
+            "org.apache.cxf:cxf-tools-wsdlto-frontend-jaxws:$cxfVersion"
+}
+
+project.ext {
+    wsdlDir = file("src/main/resources/wsdl")
+    generatedWsdlDir = file("src/main/java")
+    wsdlsToGenerate = [
+            ['-xjc', "-b", "$wsdlDir/bindings.xjb", "-p", "com.whitney.dao.package", "$wsdlDir/wsdl.xml"],
+    ]
+}
+
+task wsdl2java() {
+    if (!wsdlDir.listFiles()) {
+        // do nothing
+    } else {
+        inputs.files wsdlDir.listFiles()
+        outputs.files generatedWsdlDir
+        doLast {
+            wsdlsToGenerate.each { argsin ->
+                argsin.add(argsin.size - 1, '-d')
+                argsin.add(argsin.size - 1, generatedWsdlDir)
+
+                javaexec {
+                    classpath configurations.ws
+                    main = 'org.apache.cxf.tools.wsdlto.WSDLToJava'
+                    args = argsin
+                    systemProperties = ['exitOnFinish': 'TRUE']
+                }
+            }
+        }
+    }
+}

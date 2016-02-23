@@ -1,0 +1,58 @@
+server:
+  port: 8082
+  #uncomment to enable ssl
+  #port: 8443
+  #ssl:
+    #key-store: sample.jks
+    #key-store-password: secret
+    #key-password: password
+
+spring:
+  profiles: local
+
+  datasource:
+    dataSourceClassName: org.h2.jdbcx.JdbcDataSource
+    url: jdbc:h2:mem:sales;DB_CLOSE_DELAY=-1
+    databaseName:
+    serverName:
+    username:
+    password:
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    database: H2
+    openInView: false
+    show_sql: true
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+      naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
+    properties:
+      hibernate.cache.use_second_level_cache: true
+      hibernate.cache.use_query_cache: false
+      hibernate.generate_statistics: true
+      hibernate.cache.region.factory_class: org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+
+  activemq:
+    brokerUrl: tcp://localhost:6161
+    inMemory: false
+
+metrics:
+  jmx.enabled: true
+  graphite:
+    enabled: false
+    host: localhost
+    port: 2003
+
+cache:
+  timeToLiveSeconds: 30
+  ehcache:
+    maxBytesLocalHeap: 64M
+
+jms:
+  hostName:
+  port:
+  queueManager:
+  username:
+  destination: TOPIC
+  enableActiveMQ: true

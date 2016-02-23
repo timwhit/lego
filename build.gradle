@@ -1,0 +1,222 @@
+apply plugin: 'idea'
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'groovy'
+    apply plugin: 'idea'
+    apply plugin: 'eclipse'
+    apply plugin: 'com.github.youribonnaffe.gradle.format'
+    apply plugin: 'rebel'
+    apply plugin: 'jacoco'
+    apply plugin: "info.solidsoft.pitest"
+    apply plugin: "io.spring.dependency-management"
+
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+
+    dependencyManagement {
+        imports {
+            mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+            //mavenBom("org.springframework.boot:spring-boot-starter-parent:${springBootVersion}")
+        }
+    }
+
+    compileJava.options.debugOptions.debugLevel = "source,lines,vars"
+    compileTestJava.options.debugOptions.debugLevel = "source,lines,vars"
+
+    repositories {
+        mavenCentral()
+        maven {
+            url "http://repo.spring.io/snapshot"
+        }
+        maven {
+            url "http://repo.spring.io/milestone"
+        }
+    }
+
+    dependencies {
+        //Spring
+        compile("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
+        compile("org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion")
+        compile("org.springframework.boot:spring-boot-starter-security:$springBootVersion")
+        compile("org.springframework.boot:spring-boot-starter-freemarker:$springBootVersion")
+
+        compile("org.springframework:spring-context-support") {
+            exclude(module: 'quartz')
+        }
+
+        compile("org.springframework.security:spring-security-ldap:3.2.8.RELEASE")
+        compile("org.springframework:spring-tx")
+
+        //Hibernate
+        compile("org.hibernate:hibernate-core:$hibernateVersion")
+        compile("org.hibernate:hibernate-entitymanager:$hibernateVersion")
+        compile("org.hibernate:hibernate-ehcache:$hibernateVersion") {
+            exclude(module: 'ehcache-core')
+        }
+        compile("org.hibernate:hibernate-validator")
+
+        //Commons
+        compile("org.apache.commons:commons-lang3:3.4")
+        compile("org.apache.commons:commons-collections4:4.0")
+        compile("commons-io:commons-io:2.4")
+        compile("commons-validator:commons-validator:1.4.1")
+
+        compile("com.google.guava:guava:18.0")
+
+        compile("net.sf.ehcache:ehcache:2.10.0") {
+            exclude(group: "org.slf4j")
+        }
+
+        compile("com.h2database:h2:1.4.188")
+
+        compile("org.apache.geronimo.javamail:geronimo-javamail_1.4_mail:1.8.4")
+
+        compile("org.hibernate:hibernate-tools:4.0.0-CR1") {
+            exclude(group: "org.eclipse.tycho", module: "org.eclipse.jdt.core")
+            exclude(group: "org.hibernate.javax.persistence", module: "hibernate-jpa-2.0-api")
+            exclude(group: "freemarker", module: "freemarker")
+        }
+
+        compile("org.modelmapper:modelmapper:0.7.5")
+
+        compile("org.springframework:spring-jms:4.1.7.RELEASE")
+        compile("org.apache.activemq:activemq-broker:5.10.2")
+
+        testCompile("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
+        testCompile("org.codehaus.groovy:groovy-all:2.4.4")
+        testCompile("org.apache.directory.server:apacheds-server-jndi:1.5.5")
+    }
+
+    format {
+        configurationFile = file("$rootDir/formatter.xml")
+    }
+
+    task fixLineEndings(type: LineEndingTask)
+
+    fixLineEndings.dependsOn format
+    compileJava.dependsOn fixLineEndings
+
+    version = '5.0.0'
+
+    defaultTasks 'build'
+
+    jacocoTestReport {
+        reports {
+            xml.enabled true
+            csv.enabled true
+            html.enabled true
+        }
+    }
+
+    test {
+        jacoco {
+            append = false
+            destinationFile = file("reports/jacoco/jacoco-ut.exec")
+        }
+    }
+
+    task javadoc(type: Javadoc, overwrite: true) {
+        source = sourceSets.main.allJava
+        destinationDir = new File("${project.buildDir}/docs")
+        exclude '**/generated/**', '**/notification/**'
+        classpath = configurations.compile
+    }
+
+    pitest {
+        targetClasses = [
+                'com.whitney*',
+        ]
+        excludedClasses = [
+
+        ]
+        // Uncomment the line below and modify targetClasses to point to
+        // specific classes you wish to test
+        targetTests = [
+
+        ]
+        pitestVersion = "1.1.7" //Don't use 1.1.6 which is the version of the gradle plugin, this version has stalling issues.
+        threads = Runtime.getRuntime().availableProcessors()
+        // maxMutationsPerClass = 1
+        // excludedMethods = ['hashCode', 'equals']
+        outputFormats = ['XML', 'HTML']
+        jvmArgs = ['-Xmx2048m']
+        verbose = false
+        timeoutFactor = 30.0 //A factor to apply to the normal runtime of a test when considering if it is stuck in an infinite loop.
+        // historyInputLocation = "/tmp/pitHistory"
+        // historyOutputLocation = "/tmp/pitHistory"
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = "$gradleVersion"
+}
+
+idea {
+    module {
+        inheritOutputDirs = false
+        outputDir = file("$buildDir/classes/main/")
+    }
+    project {
+        jdkName = '1.8'
+        languageLevel = '1.8'
+    }
+}
+
+buildscript {
+    ext {
+        dependencyManagementPluginVersion = '0.5.5.RELEASE'
+        springBootVersion = "$springBootVersion"
+    }
+
+    repositories {
+        mavenCentral()
+        jcenter()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+        maven {
+            url "http://oss.sonatype.org/content/repositories/snapshots/"
+        }
+    }
+    dependencies {
+        classpath("io.spring.gradle:dependency-management-plugin:${dependencyManagementPluginVersion}")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+
+        // Formatting
+        classpath("gradle.plugin.com.github.youribonnaffe.gradle.format:gradle-format-plugin:1.2") {
+            exclude(group: "org.eclipse.tycho", module: "org.eclipse.jdt.core")
+        }
+        classpath("org.eclipse.tycho:org.eclipse.jdt.core:3.10.0.v20140604-1726")
+
+        // JRebel
+        classpath("org.zeroturnaround:gradle-jrebel-plugin:1.1.2")
+
+        //JavaDoc Aggregation
+        classpath("com.netflix.nebula:gradle-aggregate-javadocs-plugin:2.2.+")
+
+        //PIT Mutation testing
+        classpath("info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.6")
+    }
+}
+
+/**
+ * This is basically a hack to fix issues with running the format plugin on Windows.
+ * When you force it to run after the format plugin, it fixes the line endings.
+ */
+class LineEndingTask extends DefaultTask {
+    def FileCollection files = project.sourceSets.main.java + project.sourceSets.test.java
+
+    @TaskAction
+    def fix() {
+        files.each { File file ->
+            if (file.isFile()) {
+                def text = file.text.replaceAll("\r\n", "\n")
+                if (file.text != text) {
+                    logger.info "Fixing line ending $file.name"
+                    file.write(text)
+                }
+            }
+        }
+    }
+}

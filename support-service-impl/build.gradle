@@ -1,0 +1,10 @@
+dependencies {
+    compile project(":common")
+    compile project(":support-service")
+    compile project(":support-data")
+    runtime project(":support-data-impl")
+
+    compile("commons-codec:commons-codec:1.10")
+
+    compile("org.apache.geronimo.specs:geronimo-j2ee-connector_1.5_spec:2.0.0")
+}

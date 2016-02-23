@@ -1,0 +1,59 @@
+apply plugin: 'eclipse-wtp'
+//apply plugin: 'spring-boot'
+
+dependencies {
+    compile project(':sales-service')
+    compile project(':common')
+    runtime project(':sales-service-impl')
+
+    //providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+
+    //Liquibase
+    /*compile("org.liquibase:liquibase-core") {
+        //exclude jetty otherwise Spring boot tries to start the jetty server and fails
+        exclude(module: "jetty-servlet")
+    }
+    compile("org.liquibase.ext:liquibase-hibernate4:3.5") {
+        exclude(module: 'hibernate-jpa-2.0-api')
+        exclude(module: "jetty-servlet")
+        //exclude liquibase otherwise 3.2.0 gets pulled in which has classloader issues
+        exclude(module: "liquibase-core")
+    }*/
+
+    compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
+
+    testCompile project(":sales-service-impl")
+    testCompile project(':sales-service-impl').sourceSets.test.output
+
+    testCompile("com.github.tomakehurst:wiremock:1.57")
+    //Fixes an issue with TestRestTemplate not handing errors correctly.
+    testCompile("org.apache.httpcomponents:httpclient") {
+        exclude(group: "org.mockito")
+    }
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
+    }
+}
+
+/*springBoot {
+    mainClass = "com.whitney.sales.Application"
+}*/
+
+/*bootRun {
+    // pass command line options from gradle to bootRun
+    // usage: gradlew bootRun "-Dspring.profiles.active=local,protractor"
+    if (System.properties.containsKey('spring.profiles.active')) {
+        systemProperty "spring.profiles.active", System.properties['spring.profiles.active']
+    }
+}*/
+
+/*if (System.env.REBEL_HOME) {
+    applicationDefaultJvmArgs = ["-javaagent:${System.env.REBEL_HOME}/jrebel.jar", "-Drebel.check_class_hash=true"]
+}*/

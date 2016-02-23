@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+    <changeSet id="1" author="timw">
+        <createTable tableName="SALES">
+            <column name="SALES_ID" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="PRODUCT_ID" type="BIGINT">
+                <constraints nullable="false" />
+            </column>
+            <column name="USER_ID" type="BIGINT">
+                <constraints nullable="false" />
+            </column>
+            <column name="QUANTITY" type="INTEGER">
+                <constraints nullable="false" />
+            </column>
+            <column name="AMOUNT" type="CURRENCY">
+                <constraints nullable="false" />
+            </column>
+            <column name="CREATED_DATE" type="DATETIME"/>
+            <column name="LAST_MODIFIED_DATE" type="DATETIME"/>
+            <column name="CREATED_USER_ID" type="BIGINT"/>
+            <column name="LAST_MODIFIED_USER_ID" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,14 @@
+.gradle
+build/
+.classpath
+.project
+.settings/
+.tmp/
+*.iml
+.idea/
+rebel.xml
+*.ipr
+*.iws
+reports/
+.DS_Store
+.sonar/

@@ -1,0 +1,4 @@
+include "parent-web",
+        "sales-web", "sales-service", "sales-service-impl", "sales-data", "sales-data-impl",
+        "support-web", "support-service", "support-service-impl", "support-data", "support-data-impl",
+        "common"
