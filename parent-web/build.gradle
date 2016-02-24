@@ -5,7 +5,7 @@ dependencies {
     compile project(':sales-web')
     compile project(':support-web')
 
-    /*compile("org.liquibase:liquibase-core") {
+    compile("org.liquibase:liquibase-core") {
         //eclude jetty otherwise Spring boot tries to start the jetty server and fails
         exclude(module: "jetty-servlet")
     }
@@ -14,7 +14,7 @@ dependencies {
         exclude(module: "jetty-servlet")
         //exclude liquibase otherwise 3.2.0 gets pulled in which has classloader issues
         exclude(module: "liquibase-core")
-    }*/
+    }
 }
 
 buildscript {

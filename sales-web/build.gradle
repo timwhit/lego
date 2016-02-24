@@ -9,7 +9,7 @@ dependencies {
     //providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 
     //Liquibase
-    /*compile("org.liquibase:liquibase-core") {
+    compile("org.liquibase:liquibase-core") {
         //exclude jetty otherwise Spring boot tries to start the jetty server and fails
         exclude(module: "jetty-servlet")
     }
@@ -18,7 +18,7 @@ dependencies {
         exclude(module: "jetty-servlet")
         //exclude liquibase otherwise 3.2.0 gets pulled in which has classloader issues
         exclude(module: "liquibase-core")
-    }*/
+    }
 
     compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
 

@@ -1,11 +1,13 @@
 server:
-  port: 8081
   #uncomment to enable ssl
   #port: 8443
   #ssl:
     #key-store: sample.jks
     #key-store-password: secret
     #key-password: password
+
+support:
+  port: 8082
 
 spring:
   profiles: local

@@ -1,5 +1,4 @@
 server:
-  port: 8082
   #uncomment to enable ssl
   #port: 8443
   #ssl:
@@ -7,8 +6,11 @@ server:
     #key-store-password: secret
     #key-password: password
 
+sales:
+  port: 8081
+
 spring:
-  profiles: local
+  profiles: local.sales
 
   datasource:
     dataSourceClassName: org.h2.jdbcx.JdbcDataSource
