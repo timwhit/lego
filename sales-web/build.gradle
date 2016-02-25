@@ -1,12 +1,9 @@
 apply plugin: 'eclipse-wtp'
-//apply plugin: 'spring-boot'
 
 dependencies {
     compile project(':sales-service')
     compile project(':common')
     runtime project(':sales-service-impl')
-
-    //providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 
     //Liquibase
     compile("org.liquibase:liquibase-core") {
@@ -41,19 +38,3 @@ buildscript {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
     }
 }
-
-/*springBoot {
-    mainClass = "com.whitney.sales.Application"
-}*/
-
-/*bootRun {
-    // pass command line options from gradle to bootRun
-    // usage: gradlew bootRun "-Dspring.profiles.active=local,protractor"
-    if (System.properties.containsKey('spring.profiles.active')) {
-        systemProperty "spring.profiles.active", System.properties['spring.profiles.active']
-    }
-}*/
-
-/*if (System.env.REBEL_HOME) {
-    applicationDefaultJvmArgs = ["-javaagent:${System.env.REBEL_HOME}/jrebel.jar", "-Drebel.check_class_hash=true"]
-}*/

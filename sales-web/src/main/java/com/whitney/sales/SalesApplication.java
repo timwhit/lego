@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 @EnableAutoConfiguration
 @ComponentScan(value = { "com.whitney.sales", "com.whitney.common" })
 public class SalesApplication extends AnnotationConfigEmbeddedWebApplicationContext {
-    @Value("${sales.port:8081}")
+    @Value("${sales.port}")
     private Integer port;
 
     @Bean
