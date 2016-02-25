@@ -5,7 +5,7 @@ A monolith microservice POC.
 For many organizations a full microservice architecture will present many organizational and technological problems. In order to be "tall enough" to use a full microservices architecture an organization should meet the following basic characteristics (http://martinfowler.com/bliki/MicroservicePrerequisites.html):
 
 1. Rapid provisioning of new servers. Ideally cloud native.
-1. Monitoring. Things like tracing and circuit breakers are critical.
+1. Monitoring. Things like distributed tracing and circuit breakers are critical.
 1. Rapid application deployment. Continuous Deployment. A DevOps culture.
 1. Autoscaling. Ability to scale a single service when load increases.
 1. Governance around service contracts.
