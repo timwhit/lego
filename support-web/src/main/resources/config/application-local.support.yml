@@ -10,7 +10,7 @@ support:
   port: 8082
 
 spring:
-  profiles: local
+  profiles: local.support
 
   datasource:
     dataSourceClassName: org.h2.jdbcx.JdbcDataSource

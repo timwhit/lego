@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class Application {
     public static void main(String[] args) throws Exception {
         start(SalesApplication.class).profiles("local.sales").run(args);
-        start(SupportApplication.class).profiles("local").run(args);
+        start(SupportApplication.class).profiles("local.support").run(args);
     }
 
     private static SpringApplicationBuilder start(Object sources) {

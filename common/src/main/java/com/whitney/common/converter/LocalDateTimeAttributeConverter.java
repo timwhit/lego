@@ -1,4 +1,4 @@
-package com.whitney.sales.data.converter;
+package com.whitney.common.converter;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
