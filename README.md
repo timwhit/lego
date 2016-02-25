@@ -10,7 +10,7 @@ For many organizations a full microservice architecture will present many organi
 1. Autoscaling. Ability to scale a single service when load increases.
 1. Governance around service contracts.
 
-Many organizations struggle with several aspects of this, the lego monolith will allow product teams to embrace several aspects of microservices without having to meet all the prerequisites. The benefits:
+Many organizations struggle with several aspects of this; the lego monolith will allow product teams to embrace several aspects of microservices without having to meet all the prerequisites. The benefits:
 
 1. Decoupled Design. Each service lives in it's own bounded context that can only communicate with other services over decoupled interfaces, e.g. REST or SOAP.
 1. Choice of language. Not to the same extent as a true microservice architecture, however each service can be build in any JVM language. e.g. Java, Groovy, Scala, Kotlin, etc.
