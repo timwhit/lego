@@ -1,0 +1,8 @@
+apply plugin: 'eclipse-wtp'
+
+dependencies {
+    compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
+
+    compile("org.springframework:spring-jms")
+    compile("org.apache.activemq:activemq-broker")
+}

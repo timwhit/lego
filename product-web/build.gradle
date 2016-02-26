@@ -1,6 +1,7 @@
 apply plugin: 'eclipse-wtp'
 
 dependencies {
+    compile project(':product-vo')
     compile project(':product-service')
     compile project(':common')
     runtime project(':product-service-impl')
@@ -26,15 +27,5 @@ dependencies {
     //Fixes an issue with TestRestTemplate not handing errors correctly.
     testCompile("org.apache.httpcomponents:httpclient") {
         exclude(group: "org.mockito")
-    }
-}
-
-buildscript {
-    repositories {
-        mavenCentral()
-        jcenter()
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
     }
 }

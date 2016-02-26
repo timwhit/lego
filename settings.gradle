@@ -1,5 +1,5 @@
 include "parent-web",
-        "sales-web", "sales-service", "sales-service-impl", "sales-data", "sales-data-impl",
+        "sales-web", "sales-service", "sales-service-impl", "sales-data", "sales-data-impl", "sales-vo",
         "support-web", "support-service", "support-service-impl", "support-data", "support-data-impl",
-        "product-web", "product-service", "product-service-impl", "product-data", "product-data-impl",
-        "common"
+        "product-web", "product-service", "product-service-impl", "product-data", "product-data-impl", "product-vo",
+        "common", "queue"

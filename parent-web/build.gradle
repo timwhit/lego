@@ -5,6 +5,7 @@ dependencies {
     compile project(':sales-web')
     compile project(':support-web')
     compile project(':product-web')
+    compile project(':queue')
 
     compile("org.liquibase:liquibase-core") {
         //eclude jetty otherwise Spring boot tries to start the jetty server and fails

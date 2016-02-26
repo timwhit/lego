@@ -1,39 +1,35 @@
 package com.whitney.product.domain;
 
+import java.math.BigDecimal;
+
 public class Product {
     private Long id;
-    private Long salesId;
-    private Long productId;
-    private Long userId;
     private String description;
+    private BigDecimal amount;
+    private Integer inventory;
 
     public Product() {}
 
-    public Product(Long id, Long salesId, Long productId, Long userId, String description) {
+    public Product(Long id, String description, BigDecimal amount, Integer inventory) {
         this.id = id;
-        this.salesId = salesId;
-        this.productId = productId;
-        this.userId = userId;
         this.description = description;
+        this.amount = amount;
+        this.inventory = inventory;
     }
 
     public Long getId() {
         return id;
     }
 
-    public Long getSalesId() {
-        return salesId;
-    }
-
-    public Long getProductId() {
-        return productId;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
     public String getDescription() {
         return description;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public Integer getInventory() {
+        return inventory;
     }
 }

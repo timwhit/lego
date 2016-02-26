@@ -17,7 +17,6 @@ subprojects {
     dependencyManagement {
         imports {
             mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
-            //mavenBom("org.springframework.boot:spring-boot-starter-parent:${springBootVersion}")
         }
     }
 
@@ -39,7 +38,6 @@ subprojects {
         compile("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
         compile("org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion")
         compile("org.springframework.boot:spring-boot-starter-security:$springBootVersion")
-        compile("org.springframework.boot:spring-boot-starter-freemarker:$springBootVersion")
 
         compile("org.springframework:spring-context-support") {
             exclude(module: 'quartz')

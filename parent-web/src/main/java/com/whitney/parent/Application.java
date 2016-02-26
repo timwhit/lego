@@ -1,6 +1,7 @@
 package com.whitney.parent;
 
 import com.whitney.product.ProductApplication;
+import com.whitney.queue.QueueApplication;
 import com.whitney.sales.SalesApplication;
 import com.whitney.support.SupportApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -22,6 +23,7 @@ public class Application {
         start(SalesApplication.class).profiles(profile + ".sales").run(args);
         start(SupportApplication.class).profiles(profile + ".support").run(args);
         start(ProductApplication.class).profiles(profile + ".product").run(args);
+        start(QueueApplication.class).profiles(profile + ".queue").web(false).run(args);
     }
 
     private static SpringApplicationBuilder start(Object sources) {

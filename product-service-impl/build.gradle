@@ -3,6 +3,7 @@ dependencies {
     compile project(":product-service")
     compile project(":product-data")
     runtime project(":product-data-impl")
+    compile project(':sales-vo')
 
     compile("commons-codec:commons-codec:1.10")
 

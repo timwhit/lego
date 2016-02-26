@@ -1,23 +1,22 @@
 package com.whitney.product.data.dto;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "SUPPORT")
+@Table(name = "PRODUCT")
 public class ProductDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "SUPPORT_ID")
-    private Long id;
-    @Column(name = "SALES_ID")
-    private Long salesId;
     @Column(name = "PRODUCT_ID")
-    private Long productId;
-    @Column(name = "USER_ID")
-    private Long userId;
+    private Long id;
     @Column(name = "DESCRIPTION")
     private String description;
+    @Column(name = "AMOUNT")
+    private BigDecimal amount;
+    @Column(name = "INVENTORY")
+    private Integer inventory;
     @Column(name = "CREATED_DATE")
     private LocalDateTime createdDate;
     @Column(name = "CREATED_USER_ID")
@@ -35,36 +34,28 @@ public class ProductDTO {
         this.id = id;
     }
 
-    public Long getSalesId() {
-        return salesId;
-    }
-
-    public void setSalesId(Long salesId) {
-        this.salesId = salesId;
-    }
-
-    public Long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Long productId) {
-        this.productId = productId;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public Integer getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Integer inventory) {
+        this.inventory = inventory;
     }
 
     public LocalDateTime getCreatedDate() {

@@ -8,9 +8,11 @@ import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletCon
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jms.annotation.EnableJms;
 
 @Configuration
 @EnableAutoConfiguration
+@EnableJms
 @ComponentScan(value = { "com.whitney.support", "com.whitney.common" })
 public class SupportApplication extends AnnotationConfigEmbeddedWebApplicationContext {
     @Value("${support.port:8082}")

@@ -8,11 +8,13 @@ import com.whitney.support.data.dto.SaleDTO;
 import com.whitney.support.data.dto.SupportDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
 import java.time.LocalDateTime;
 
 @Validated
+@Transactional
 @Service
 public class SupportServiceImpl implements SupportService {
     @Autowired
