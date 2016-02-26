@@ -1,0 +1,87 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: timw
+      changes:
+        - createTable:
+            tableName: support
+            columns:
+              - column:
+                  name: support_id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: sales_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: product_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: clob
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_date
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 2
+      author: timw
+      changes:
+        - insert:
+            tableName: support
+            columns:
+              - column:
+                  name: sales_id
+                  value: 1
+              - column:
+                  name: product_id
+                  value: 1
+              - column:
+                  name: user_id
+                  value: 1
+              - column:
+                  name: description
+                  value: I don't like this product.
+              - column:
+                  name: created_date
+                  valueDate: CURRENT_TIME()
+              - column:
+                  name: created_user_id
+                  value: 1
+              - column:
+                  name: modified_date
+                  valueDate: CURRENT_TIME()
+              - column:
+                  name: modified_user_id
+                  value: 1
