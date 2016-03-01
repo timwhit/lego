@@ -6,11 +6,8 @@ server:
     #key-store-password: secret
     #key-password: password
 
-support:
-  port: 8082
-
 spring:
-  profiles: local.support
+  profiles: local.queue
 
   datasource:
     dataSourceClassName: org.h2.jdbcx.JdbcDataSource

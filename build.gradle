@@ -35,9 +35,9 @@ subprojects {
 
     dependencies {
         //Spring
-        compile("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
-        compile("org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion")
-        compile("org.springframework.boot:spring-boot-starter-security:$springBootVersion")
+        compile("org.springframework.boot:spring-boot-starter-web")
+        compile("org.springframework.boot:spring-boot-starter-data-jpa")
+        compile("org.springframework.boot:spring-boot-starter-security")
 
         compile("org.springframework:spring-context-support") {
             exclude(module: 'quartz')
@@ -81,7 +81,7 @@ subprojects {
         compile("org.springframework:spring-jms:4.1.7.RELEASE")
         compile("org.apache.activemq:activemq-broker:5.10.2")
 
-        testCompile("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
+        testCompile("org.springframework.boot:spring-boot-starter-test")
         testCompile("org.codehaus.groovy:groovy-all:2.4.4")
         testCompile("org.apache.directory.server:apacheds-server-jndi:1.5.5")
     }

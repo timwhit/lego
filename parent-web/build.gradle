@@ -6,17 +6,6 @@ dependencies {
     compile project(':support-web')
     compile project(':product-web')
     compile project(':queue')
-
-    compile("org.liquibase:liquibase-core") {
-        //eclude jetty otherwise Spring boot tries to start the jetty server and fails
-        exclude(module: "jetty-servlet")
-    }
-    compile("org.liquibase.ext:liquibase-hibernate4:3.5") {
-        exclude(module: 'hibernate-jpa-2.0-api')
-        exclude(module: "jetty-servlet")
-        //exclude liquibase otherwise 3.2.0 gets pulled in which has classloader issues
-        exclude(module: "liquibase-core")
-    }
 }
 
 buildscript {
