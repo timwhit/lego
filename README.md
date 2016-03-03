@@ -17,6 +17,10 @@ Many organizations struggle with several aspects of this; the lego monolith will
 1. Choice of persistence. Each service should own the data source. e.g. traditional RDBMS, document DBs, flat files, etc.
 1. Asynchronous. This POC includes an ActiveMQ message broker that services can publish and listen to.
 
-## Run the application
+## Build & Run the application
 The application can be run from the command line:
 `./gradlew bootRun`
+
+To build the application execute: `./gradlew [clean] build`. `clean` is optional.
+
+The executable jar file will be created in `parent-web/build/libs/` and can be executed from the root of the project using this command: `java -jar parent-web/build/libs/parent-web-1.0.0.jar`
