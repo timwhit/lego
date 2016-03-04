@@ -95,7 +95,7 @@ subprojects {
     fixLineEndings.dependsOn format
     compileJava.dependsOn fixLineEndings
 
-    version = '5.0.0'
+    version = '1.0.0'
 
     defaultTasks 'build'
 
